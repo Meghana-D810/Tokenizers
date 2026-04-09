@@ -1,32 +1,32 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+
+model = SentenceTransformer("all-MiniLM-L6-v2")
 
 
 def score_tokens(word_tokens):
 
     text = " ".join(word_tokens)
 
-    vectorizer = TfidfVectorizer(stop_words="english")
+    prompt_embedding = model.encode([text])
 
-    tfidf_matrix = vectorizer.fit_transform([text])
+    token_embeddings = model.encode(word_tokens)
 
-    feature_names = vectorizer.get_feature_names_out()
-    scores = tfidf_matrix.toarray()[0]
+    similarities = cosine_similarity(token_embeddings, prompt_embedding)
+
+    scores = similarities.flatten()
+
+    max_score = max(scores) if max(scores) != 0 else 1
 
     result = []
 
-    for word in word_tokens:
+    for word, score in zip(word_tokens, scores):
 
-        word_lower = word.lower()
-
-        if word_lower in feature_names:
-            index = list(feature_names).index(word_lower)
-            score = float(scores[index])
-        else:
-            score = 0.0
+        normalized = score / max_score
 
         result.append({
             "word": word,
-            "score": round(score, 3)
+            "score": round(float(normalized), 3)
         })
 
     return result
