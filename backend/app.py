@@ -5,6 +5,7 @@ from scorer import score_tokens
 from pricing import estimate_cost
 from trimmer import trim_prompt
 from gemini_client import improve_prompt
+from comparison import compare_with_optimized
 
 app = Flask(
     __name__,
@@ -37,12 +38,20 @@ def analyze():
 
     optimized_prompt = improve_prompt(trimmed_data["trimmed_prompt"])
 
+    comparison = compare_with_optimized(
+        llm_token_count,
+        cost,
+        optimized_prompt,
+        model
+)
+
     return jsonify({
         "scores": scores,
         "token_count": llm_token_count,
         "estimated_cost": cost,
         "trimmed_prompt": trimmed_data["trimmed_prompt"],
-        "optimized_prompt": optimized_prompt
+        "optimized_prompt": optimized_prompt,
+        "comparison": comparison
     })
 
 if __name__ == "__main__":

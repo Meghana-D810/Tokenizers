@@ -25,16 +25,41 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <main class="main-container">
 
-    <!-- Results Panel -->
-    <div class="results-card" id="results">
-        Token results will appear here
-    </div>
+   <div class="results-container">
+
+  <!-- User Prompt Stats -->
+  <div class="result-card">
+    <h3>Original Prompt</h3>
+    <p>Tokens: <span id="tokenCount">-</span></p>
+    <p>Cost: $<span id="cost">-</span></p>
+  </div>
+
+  <!-- Trimmed Prompt -->
+  <div class="result-card">
     <h3>Trimmed Prompt</h3>
-<div id="trimmedPrompt"></div>
+    <p id="trimmedPrompt">-</p>
+  </div>
 
-<h3>Optimized Prompt</h3>
-<div id="optimizedPrompt"></div>
+  <!-- Optimized Prompt -->
+  <div class="result-card">
+    <h3>Optimized Prompt</h3>
+    <p id="optimizedPrompt">-</p>
+  </div>
 
+  <!-- Optimization Comparison -->
+  <div class="result-card">
+    <h3>Optimization Comparison</h3>
+
+    <p>Optimized Tokens: <span id="optimizedTokens">-</span></p>
+    <p>Optimized Cost: $<span id="optimizedCost">-</span></p>
+
+    <p>Tokens Saved: <span id="tokenSavings">-</span></p>
+    <p>Cost Saved: $<span id="costSavings">-</span></p>
+
+    <p>Reduction: <span id="percentageSaved">-</span>%</p>
+  </div>
+
+</div>
 </main>
 
 <!-- Bottom Input Area -->

@@ -278,3 +278,24 @@ height:70px;
 }
 
 }
+.results-container{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin-top:40px;
+}
+
+.result-card{
+    background:rgba(255,255,255,0.08);
+    padding:20px;
+    border-radius:12px;
+    backdrop-filter:blur(10px);
+}
+
+.result-card h3{
+    margin-bottom:10px;
+}
+
+.result-card p{
+    margin:6px 0;
+}
