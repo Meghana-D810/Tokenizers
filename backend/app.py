@@ -3,6 +3,8 @@ from flask_cors import CORS
 from tokenizer import tokenize_text
 from scorer import score_tokens
 from pricing import estimate_cost
+from trimmer import trim_prompt
+from gemini_client import improve_prompt
 
 app = Flask(
     __name__,
@@ -31,10 +33,16 @@ def analyze():
 
     cost = estimate_cost(llm_token_count, model)
 
+    trimmed_data = trim_prompt(scores)
+
+    optimized_prompt = improve_prompt(trimmed_data["trimmed_prompt"])
+
     return jsonify({
         "scores": scores,
         "token_count": llm_token_count,
-        "estimated_cost": cost
+        "estimated_cost": cost,
+        "trimmed_prompt": trimmed_data["trimmed_prompt"],
+        "optimized_prompt": optimized_prompt
     })
 
 if __name__ == "__main__":

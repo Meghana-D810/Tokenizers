@@ -22,4 +22,6 @@ async function analyzePrompt() {
         Tokens: ${data.token_count} <br>
         Cost: $${data.estimated_cost}
     `;
+    document.getElementById("trimmedPrompt").innerText = data.trimmed_prompt;
+document.getElementById("optimizedPrompt").innerText = data.optimized_prompt;
 }
