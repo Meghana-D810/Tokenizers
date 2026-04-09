@@ -299,3 +299,30 @@ height:70px;
 .result-card p{
     margin:6px 0;
 }
+
+.heatmap-section{
+    margin-top:40px;
+}
+
+.heatmap-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+    padding:20px;
+    background:rgba(255,255,255,0.05);
+    border-radius:12px;
+}
+
+.heatmap-token{
+    padding:6px 12px;
+    border-radius:6px;
+    font-size:14px;
+    color:white;
+    background:rgba(255,255,255,0.15);
+    transition:0.2s;
+}
+
+.heatmap-token:hover{
+    transform:scale(1.1);
+}

@@ -60,6 +60,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
   </div>
 
 </div>
+<div class="heatmap-section">
+
+    <h3>Token Importance Heatmap</h3>
+
+    <div id="heatmapContainer" class="heatmap-container">
+        <!-- heatmap tokens will appear here -->
+    </div>
+
+</div>
 </main>
 
 <!-- Bottom Input Area -->
@@ -93,6 +102,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 </div>
 
+<script src="{{ url_for('static', filename='heatmap.js') }}"></script>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>

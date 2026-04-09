@@ -1,106 +1,59 @@
-// Live Prompt Heatmap for TokenScope
+function getHeatColor(score){
 
-const textarea = document.getElementById("prompt");
-const resultsDiv = document.getElementById("results");
+    // score between 0 and 1
 
-// create heatmap display area
-const heatmapContainer = document.createElement("div");
-heatmapContainer.id = "heatmap";
-heatmapContainer.style.marginTop = "20px";
-heatmapContainer.style.lineHeight = "2";
-
-resultsDiv.appendChild(heatmapContainer);
-
-
-// debounce to prevent too many API calls
-let debounceTimer;
-
-textarea.addEventListener("input", () => {
-
-    clearTimeout(debounceTimer);
-
-    debounceTimer = setTimeout(() => {
-        generateHeatmap();
-    }, 350);
-
-});
-
-
-async function generateHeatmap(){
-
-    const prompt = textarea.value;
-    const model = document.getElementById("model").value;
-
-    if(prompt.trim() === ""){
-        heatmapContainer.innerHTML = "";
-        return;
+    if(score === 0){
+        return "#6b7280"; // gray
     }
 
-    try{
+    // 0 → 0.5  (gray → blue)
+    if(score <= 0.5){
 
-        const response = await fetch("http://127.0.0.1:5000/analyze",{
+        const ratio = score / 0.5;
 
-            method:"POST",
+        const r = Math.floor(107 * (1 - ratio)); 
+        const g = Math.floor(114 + (100 * ratio));
+        const b = Math.floor(128 + (127 * ratio));
 
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify({
-                prompt:prompt,
-                model:model
-            })
-
-        });
-
-        const data = await response.json();
-
-        renderHeatmap(data.scores);
-
-        // also update token stats
-        resultsDiv.innerHTML = `
-            Tokens: ${data.token_count} <br>
-            Cost: $${data.estimated_cost}
-        `;
-
-        resultsDiv.appendChild(heatmapContainer);
-
-    }
-    catch(error){
-
-        console.error("Heatmap error:", error);
-
+        return `rgb(${r}, ${g}, ${b})`;
     }
 
+    // 0.5 → 1 (orange → red)
+    const ratio = (score - 0.5) / 0.5;
+
+    const r = 255;
+    const g = Math.floor(165 * (1 - ratio));
+    const b = 0;
+
+    return `rgb(${r}, ${g}, ${b})`;
 }
+
 
 
 function renderHeatmap(scores){
 
-    heatmapContainer.innerHTML = "";
+    const container = document.getElementById("heatmapContainer");
 
-    scores.forEach(item => {
+    container.innerHTML = "";
+
+    scores.forEach(token => {
 
         const span = document.createElement("span");
 
-        span.textContent = item.word + " ";
+        span.className = "heatmap-token";
 
-        const score = item.score;
+        span.innerText = token.word;
 
-        // heatmap color scale
-        const red = Math.floor(255 * score);
-        const green = Math.floor(200 * (1 - score));
+        span.style.backgroundColor = getHeatColor(token.score);
 
-        span.style.background = `rgba(${red},${green},80,0.6)`;
+        span.title = "Score: " + token.score;
 
-        span.style.padding = "4px 8px";
-        span.style.margin = "3px";
-        span.style.borderRadius = "6px";
-
-        span.style.transition = "0.25s ease";
-
-        heatmapContainer.appendChild(span);
+        container.appendChild(span);
 
     });
+
+    const maxScore = Math.max(...scores.map(t => t.score));
+
+const normalized = maxScore === 0 ? 0 : token.score / maxScore;
 
 }

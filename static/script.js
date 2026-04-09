@@ -61,5 +61,8 @@ async function analyzePrompt() {
 
     }
 
+    console.log(data.scores);
+renderHeatmap(data.scores);
+
 
 }
