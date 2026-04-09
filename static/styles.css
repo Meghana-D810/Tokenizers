@@ -1,0 +1,280 @@
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: "Segoe UI", sans-serif;
+}
+
+/* BODY */
+
+body{
+height:100vh;
+background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+display:flex;
+flex-direction:column;
+overflow-x:hidden;
+}
+
+/* HEADER */
+
+.header{
+text-align:center;
+padding:25px;
+font-size:24px;
+font-weight:600;
+letter-spacing:1px;
+}
+
+/* MAIN AREA */
+
+.main-container{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+padding-top:40px;
+}
+
+/* RESULTS CARD */
+
+.results-card{
+width:60%;
+min-height:120px;
+
+background: rgba(255,255,255,0.08);
+backdrop-filter: blur(10px);
+
+border-radius:16px;
+
+padding:25px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+
+transition:all .3s ease;
+}
+
+.results-card:hover{
+transform:translateY(-3px);
+}
+
+/* INPUT AREA */
+
+.input-container{
+
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+
+width:65%;
+
+display:flex;
+flex-direction:column;
+gap:10px;
+
+}
+
+/* TOOLS PANEL */
+
+.tools-panel{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:8px 12px;
+
+background:rgba(255,255,255,0.06);
+
+border-radius:12px;
+
+backdrop-filter: blur(6px);
+
+}
+
+.tools-panel select{
+
+background:transparent;
+color:white;
+
+border:none;
+
+outline:none;
+
+font-size:14px;
+
+cursor:pointer;
+}
+
+.clear-btn{
+
+background:none;
+border:none;
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+transition:0.2s;
+}
+
+.clear-btn:hover{
+color:#ff6b6b;
+transform:scale(1.1);
+}
+
+/* INPUT BOX */
+
+.input-box{
+
+display:flex;
+align-items:center;
+
+background:rgba(255,255,255,0.08);
+
+backdrop-filter: blur(12px);
+
+border-radius:20px;
+
+padding:12px;
+
+box-shadow:0 8px 25px rgba(0,0,0,0.4);
+
+transition:all .3s ease;
+
+}
+
+.input-box:focus-within{
+
+box-shadow:0 0 10px #5eead4,
+0 0 20px #5eead4;
+
+}
+
+/* TEXTAREA */
+
+textarea{
+
+flex:1;
+
+resize:none;
+
+border:none;
+outline:none;
+
+background:transparent;
+
+color:white;
+
+font-size:16px;
+
+padding:8px;
+
+height:60px;
+
+}
+
+/* SEND BUTTON */
+
+.send-btn{
+
+background:linear-gradient(135deg,#00f5a0,#00d9f5);
+
+border:none;
+
+color:white;
+
+width:45px;
+height:45px;
+
+border-radius:50%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+cursor:pointer;
+
+font-size:16px;
+
+transition:all .25s ease;
+
+}
+
+.send-btn:hover{
+
+transform:scale(1.1);
+
+box-shadow:0 0 12px #00f5a0;
+
+}
+
+/* FLOATING BACKGROUND BLOBS */
+
+.background-blobs::before,
+.background-blobs::after{
+
+content:"";
+
+position:fixed;
+
+width:400px;
+height:400px;
+
+background: radial-gradient(circle,#00d9f5,transparent);
+
+opacity:.25;
+
+filter: blur(80px);
+
+animation:float 10s infinite alternate ease-in-out;
+
+}
+
+.background-blobs::before{
+top:-100px;
+left:-100px;
+}
+
+.background-blobs::after{
+bottom:-100px;
+right:-100px;
+animation-delay:4s;
+}
+
+/* FLOAT ANIMATION */
+
+@keyframes float{
+
+from{
+transform:translateY(0px);
+}
+
+to{
+transform:translateY(60px);
+}
+
+}
+
+/* RESPONSIVE */
+
+@media (max-width:900px){
+
+.results-card{
+width:90%;
+}
+
+.input-container{
+width:90%;
+}
+
+textarea{
+height:70px;
+}
+
+}
