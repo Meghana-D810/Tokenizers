@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>TokenScope</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+<h2>TokenScope</h2>
+
+<textarea id="prompt" rows="6" cols="60"></textarea>
+
+<br><br>
+
+<select id="model">
+<option value="gpt-4o-mini">GPT-4o Mini</option>
+<option value="gpt-4o">GPT-4o</option>
+</select>
+
+<br><br>
+
+<button onclick="analyzePrompt()">Submit</button>
+
+<div id="results"></div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

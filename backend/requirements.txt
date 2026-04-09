@@ -1,0 +1,7 @@
+Flask
+flask-cors
+openai
+tiktoken
+scikit-learn
+numpy
+python-dotenv
