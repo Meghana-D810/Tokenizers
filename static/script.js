@@ -66,3 +66,15 @@ renderHeatmap(data.scores);
 
 
 }
+
+function toggleText(id){
+
+    const element = document.getElementById(id);
+
+    if(element.classList.contains("expanded")){
+        element.classList.remove("expanded");
+    } else {
+        element.classList.add("expanded");
+    }
+
+}
