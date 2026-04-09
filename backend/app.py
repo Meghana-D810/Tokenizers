@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-
-from tokenizer import count_tokens
+from tokenizer import tokenize_text
+from scorer import score_tokens
 from pricing import estimate_cost
 
 app = Flask(
@@ -23,11 +23,17 @@ def analyze():
     prompt = data.get("prompt")
     model = data.get("model")
 
-    token_count = count_tokens(prompt)
-    cost = estimate_cost(token_count, model)
+    tokens = tokenize_text(prompt,model)
+    word_tokens = tokens["word_tokens"]
+    llm_token_count = tokens["llm_token_count"]
+
+    scores = score_tokens(word_tokens)
+
+    cost = estimate_cost(llm_token_count, model)
 
     return jsonify({
-        "token_count": token_count,
+        "scores": scores,
+        "token_count": llm_token_count,
         "estimated_cost": cost
     })
 
