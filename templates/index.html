@@ -24,7 +24,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 </header>
 
 <main class="main-container">
-
+<div id="reportSection">
    <div class="results-container">
 
   <!-- User Prompt Stats -->
@@ -67,25 +67,32 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     <div id="heatmapContainer" class="heatmap-container">
         <!-- heatmap tokens will appear here -->
     </div>
-
+</div>
 </div>
 </main>
 
 <!-- Bottom Input Area -->
 <div class="input-container">
+<div class="tools-panel">
 
-    <div class="tools-panel">
+    <select id="model">
+        <option value="gpt-4o-mini">GPT-4o Mini</option>
+        <option value="gpt-4o">GPT-4o</option>
+    </select>
 
-        <select id="model">
-            <option value="gpt-4o-mini">GPT-4o Mini</option>
-            <option value="gpt-4o">GPT-4o</option>
-        </select>
+    <div class="tools-actions">
+
+        <button class="download-btn" onclick="downloadPDF()">
+            <i class="fa-solid fa-download"></i>
+        </button>
 
         <button class="clear-btn" onclick="document.getElementById('prompt').value=''">
             <i class="fa-solid fa-eraser"></i>
         </button>
 
     </div>
+
+</div>
 
     <div class="input-box">
 
@@ -101,6 +108,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     </div>
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script src="{{ url_for('static', filename='heatmap.js') }}"></script>
 <script src="{{ url_for('static', filename='script.js') }}"></script>

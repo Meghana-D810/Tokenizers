@@ -24,7 +24,7 @@ overflow-y:auto;
 .header{
 text-align:center;
 padding:25px;
-font-size:24px;
+font-size:40px;
 font-weight:600;
 letter-spacing:1px;
 }
@@ -379,4 +379,27 @@ width:100%;
 .scroll-text::-webkit-scrollbar-thumb{
     background:#5eead4;
     border-radius:10px;
+}
+
+.tools-actions{
+    display:flex;
+    gap:10px;
+}
+
+.download-btn{
+
+    background:none;
+    border:none;
+
+    color:white;
+
+    font-size:16px;
+    cursor:pointer;
+
+    transition:0.2s;
+}
+
+.download-btn:hover{
+    color:#5eead4;
+    transform:scale(1.1);
 }
