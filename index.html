@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TokenScope</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="background-blobs"></div>
+
+<header class="header">
+    <h1>TokenScope</h1>
+</header>
+
+<main class="main-container">
+<div id="reportSection">
+   <div class="results-container">
+
+  <!-- User Prompt Stats -->
+  <div class="result-card">
+    <h3>Original Prompt</h3>
+    <p>Tokens: <span id="tokenCount">-</span></p>
+    <p>Cost: $<span id="cost">-</span></p>
+  </div>
+
+  <!-- Trimmed Prompt -->
+  <div class="result-card">
+    <h3>Trimmed Prompt</h3>
+    <div class="scroll-text" id="trimmedPrompt"></div>
+  </div>
+
+  <!-- Optimized Prompt -->
+  <div class="result-card">
+    <h3>Optimized Prompt</h3>
+    <div class="scroll-text" id="optimizedPrompt"></div>
+  </div>
+
+  <!-- Optimization Comparison -->
+  <div class="result-card">
+    <h3>Optimization Comparison</h3>
+
+    <p>Optimized Tokens: <span id="optimizedTokens">-</span></p>
+    <p>Optimized Cost: $<span id="optimizedCost">-</span></p>
+
+    <p>Tokens Saved: <span id="tokenSavings">-</span></p>
+    <p>Cost Saved: $<span id="costSavings">-</span></p>
+
+    <p>Reduction: <span id="percentageSaved">-</span>%</p>
+  </div>
+
+</div>
+<div class="heatmap-section">
+
+    <h3>Token Importance Heatmap</h3>
+
+    <div id="heatmapContainer" class="heatmap-container">
+        <!-- heatmap tokens will appear here -->
+    </div>
+</div>
+</div>
+</main>
+
+<!-- Bottom Input Area -->
+<div class="input-container">
+<div class="tools-panel">
+
+    <select id="model">
+        <option value="gpt-4o-mini">GPT-4o Mini</option>
+        <option value="gpt-4o">GPT-4o</option>
+    </select>
+
+    <div class="tools-actions">
+
+        <button class="download-btn" onclick="downloadPDF()">
+            <i class="fa-solid fa-download"></i>
+        </button>
+
+        <button class="clear-btn" onclick="document.getElementById('prompt').value=''">
+            <i class="fa-solid fa-eraser"></i>
+        </button>
+
+    </div>
+
+</div>
+
+    <div class="input-box">
+
+        <textarea 
+        id="prompt"
+        placeholder="Type or paste your prompt here..."
+        ></textarea>
+
+        <button class="send-btn" onclick="analyzePrompt()">
+            <i class="fa-solid fa-paper-plane"></i>
+        </button>
+
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="{{ url_for('static', filename='heatmap.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
